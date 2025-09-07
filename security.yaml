@@ -1,0 +1,18 @@
+security:
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticators:
+                - App\Security\GoogleAuthenticator
+            logout:
+                path: app_logout
+
+    access_control:
+        - { path: ^/connect/google, roles: PUBLIC_ACCESS }
